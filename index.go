@@ -19,9 +19,9 @@ var initialized int
 // model.go
 
 type InMessage struct {
-	ChatId         string `json:"chat_id"`
-	Text           string `json:"text"`
-	Key            string `json:"key"`
+	ChatId string `json:"chat_id"`
+	Text   string `json:"text"`
+	Key    string `json:"key"`
 }
 
 // Only required fields are implemented
@@ -66,8 +66,8 @@ type TelegramUpdateResponse struct {
 }
 
 type BotConfig struct {
-	Token     string
-    Key       string
+	Token string
+	Key   string
 }
 
 // main.go
@@ -105,35 +105,35 @@ func processUpdate(update TelegramUpdate) {
 }
 
 func getConfig() BotConfig {
-    tokenPtr := os.Getenv("TELEGRAM_BOT_TOKEN")
-    key := os.Getenv("TELEGRAM_BOT_KEY")
+	tokenPtr := os.Getenv("TELEGRAM_BOT_TOKEN")
+	key := os.Getenv("TELEGRAM_BOT_KEY")
 
 	return BotConfig{
-		Token:     tokenPtr,
-        Key:       key}
+		Token: tokenPtr,
+		Key:   key}
 }
 
 func initall() {
-    if initialized == 1 {
-        return
-    }
+	if initialized == 1 {
+		return
+	}
 
-    initialized = 1;
+	initialized = 1
 
 	config := getConfig()
 	token = config.Token
-    key = config.Key
+	key = config.Key
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-    initall()
-    if strings.Contains(r.URL.RequestURI(), "/api/messages") {
-        messageHandler(w, r)
-    } else if strings.Contains(r.URL.RequestURI(), "/api/updates") {
-        webhookUpdateHandler(w, r)
-    } else {
-        w.WriteHeader(404)
-    }
+	initall()
+	if strings.Contains(r.URL.RequestURI(), "/api/messages") {
+		messageHandler(w, r)
+	} else if strings.Contains(r.URL.RequestURI(), "/api/updates") {
+		webhookUpdateHandler(w, r)
+	} else {
+		w.WriteHeader(404)
+	}
 }
 
 func messageHandler(w http.ResponseWriter, r *http.Request) {
@@ -156,11 +156,11 @@ func messageHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-    if key != m.Key {
+	if key != m.Key {
 		w.WriteHeader(403)
 		w.Write([]byte("Wrong key."))
 		return
-    }
+	}
 
 	chatId := m.ChatId
 
