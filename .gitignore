@@ -1,7 +1,6 @@
 debug
 .vscode
 *.exe
-*.json
 *.gob
 ssl
 telegram-middleman-bot

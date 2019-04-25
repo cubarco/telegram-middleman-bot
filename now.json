@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "telegram-middleman-bot",
+  "builds": [
+      {"src": "index.go", "use": "@now/go"}
+  ],
+  "routes": [
+      {"src": "/api/.*", "dest": "index.go"}
+  ],
+  "env": {
+      "TELEGRAM_BOT_TOKEN": "@telegram-bot-token",
+      "TELEGRAM_BOT_KEY": "@telegram-bot-key"
+  }
+}
