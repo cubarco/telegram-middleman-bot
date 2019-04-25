@@ -96,7 +96,7 @@ func processUpdate(update TelegramUpdate) {
 	if strings.HasPrefix(update.Message.Text, "/start") {
 		text = "Here is your chatId you can use to send messages to your Telegram account:\n\n_" + strconv.Itoa(chatId) + "_"
 	} else {
-		text = "Please use the _/start_ command to fetch a new token.\n\nFurther information at https://github.com/n1try/telegram-middleman-bot."
+		text = "Please use the _/start_ command to fetch a new token."
 	}
 	err := sendMessage(strconv.Itoa(chatId), text)
 	if err != nil {
